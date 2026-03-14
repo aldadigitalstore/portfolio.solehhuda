@@ -1,0 +1,1992 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Creative Tech Soleh Huda - UI/UX Design, Web & Mobile Development, Graphic Design, dan Video Graphic.">
+    <title>Soleh Huda | Creative Tech Portfolio</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="preload" as="image" href="profil.png" fetchpriority="high">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#ff5c33',
+                            DEFAULT: '#FF3300', // Vermilion / Warna Kejut
+                            dark: '#cc2900',
+                        },
+                        zinc: {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            500: '#71717a',
+                            900: '#18181b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #18181b;
+        }
+
+        /* Minimalist Studio Card */
+        .studio-card {
+            background: #ffffff;
+            border: 1px solid #e4e4e7;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .studio-card:hover {
+            border-color: #18181b;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px -12px rgba(0,0,0,0.08);
+        }
+
+        /* Animated Blob Shape - Clean Monocrome */
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+
+        /* Marquee Scroller for Tech Stack */
+        .logo-scroller {
+            overflow: hidden;
+            display: flex;
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            width: 100%;
+        }
+        .logo-scroller-inner {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            width: max-content;
+            animation: scroll-left 40s linear infinite;
+        }
+        .logo-scroller-inner.reverse {
+            animation: scroll-right 40s linear infinite;
+        }
+        .logo-scroller:hover .logo-scroller-inner {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-left {
+            to { transform: translateX(calc(-50% - 0.75rem)); }
+        }
+        @keyframes scroll-right {
+            from { transform: translateX(calc(-50% - 0.75rem)); }
+            to { transform: translateX(0); }
+        }
+
+        /* Page Transition animations */
+        .page-view {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        .page-view.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 3D Tilt & Enhanced Hover Animations */
+        .perspective-1000 { perspective: 1000px; }
+        
+        /* Gambar di Kiri (menghadap teks di kanan) */
+        .tilt-right { transform: rotateY(8deg) rotateX(3deg) scale(0.95); transition: all 0.7s cubic-bezier(0.25, 1, 0.3, 1); transform-style: preserve-3d; }
+        .group:hover .tilt-right { transform: rotateY(0) rotateX(0) scale(1.02); }
+        
+        /* Gambar di Kanan (menghadap teks di kiri) */
+        .tilt-left { transform: rotateY(-8deg) rotateX(3deg) scale(0.95); transition: all 0.7s cubic-bezier(0.25, 1, 0.3, 1); transform-style: preserve-3d; }
+        .group:hover .tilt-left { transform: rotateY(0) rotateX(0) scale(1.02); }
+        
+        /* Animasi scroll gambar otomatis di dalam mockup */
+        .pan-image { transition: transform 4s ease-in-out; }
+        .group:hover .pan-image { transform: translateY(-15%); }
+
+        /* Animasi stagger badge tech stack bergelombang */
+        .badge-stagger { transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .group:hover .badge-stagger { transform: translateY(-4px); border-color: #FF3300; color: #FF3300; background-color: #fff0eb; box-shadow: 0 4px 12px rgba(255,51,0,0.15); }
+        .group:hover .badge-stagger:nth-child(1) { transition-delay: 0.05s; }
+        .group:hover .badge-stagger:nth-child(2) { transition-delay: 0.1s; }
+        .group:hover .badge-stagger:nth-child(3) { transition-delay: 0.15s; }
+        .group:hover .badge-stagger:nth-child(4) { transition-delay: 0.2s; }
+        .group:hover .badge-stagger:nth-child(5) { transition-delay: 0.25s; }
+
+        /* Mobile Showcase Motion System */
+        .mobile-showcase {
+            isolation: isolate;
+        }
+
+        .mobile-sweep {
+            position: absolute;
+            inset: -30% auto -30% -40%;
+            width: 42%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+            transform: rotate(14deg) translateX(-140%);
+            animation: sweepLight 5.6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .mobile-orb {
+            animation: orbDrift 8s ease-in-out infinite;
+        }
+
+        .ms-reveal {
+            opacity: 0;
+            transform: translateY(22px);
+        }
+
+        #page-web-mobile.active .ms-reveal {
+            animation: mobileReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        #page-web-mobile.active .ms-delay-1 { animation-delay: 0.08s; }
+        #page-web-mobile.active .ms-delay-2 { animation-delay: 0.16s; }
+        #page-web-mobile.active .ms-delay-3 { animation-delay: 0.24s; }
+        #page-web-mobile.active .ms-delay-4 { animation-delay: 0.32s; }
+        #page-web-mobile.active .ms-delay-5 { animation-delay: 0.40s; }
+
+        .mobile-phone-wrap {
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+        }
+
+        .mobile-phone {
+            animation: floatPhone 4.2s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .mobile-showcase:hover .mobile-phone-wrap {
+            transform: translateY(-4px) scale(1.015);
+            filter: drop-shadow(0 20px 30px rgba(255, 51, 0, 0.16));
+        }
+
+        .ms-chip {
+            transition: transform 0.35s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mobile-showcase:hover .ms-chip {
+            transform: translateY(-3px);
+            border-color: #ffb9a6;
+            color: #cc2900;
+            box-shadow: 0 8px 18px -12px rgba(255, 51, 0, 0.45);
+        }
+
+        .ms-cta {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ms-cta::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 42%;
+            height: 100%;
+            background: linear-gradient(110deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
+            transform: skewX(-18deg);
+            transition: left 0.7s ease;
+        }
+
+        .mobile-showcase:hover .ms-cta::after {
+            left: 150%;
+        }
+
+        @keyframes mobileReveal {
+            from { opacity: 0; transform: translateY(22px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes floatPhone {
+            0%, 100% { transform: translateY(0px) rotate(-0.7deg); }
+            50% { transform: translateY(-8px) rotate(0.7deg); }
+        }
+
+        @keyframes orbDrift {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(-10px, 14px, 0) scale(1.08); }
+        }
+
+        @keyframes sweepLight {
+            0%, 20% { transform: rotate(14deg) translateX(-140%); }
+            55% { transform: rotate(14deg) translateX(320%); }
+            100% { transform: rotate(14deg) translateX(320%); }
+        }
+
+        /* Graphic Design Motion */
+        .gd-motion-target,
+        #page-graphic-design .gd-grid > button {
+            opacity: 0;
+            transform: translateY(18px) scale(0.985);
+            will-change: transform, opacity;
+        }
+
+        .gd-motion-target.is-visible,
+        #page-graphic-design .gd-grid > button.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #page-graphic-design .gd-grid > button {
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.3s ease;
+        }
+
+        #page-graphic-design .gd-grid > button:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px -18px rgba(24, 24, 27, 0.45);
+            border-color: #d4d4d8;
+        }
+
+        #page-graphic-design .gd-grid > button img {
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #page-graphic-design .gd-grid > button:hover img {
+            transform: scale(1.055);
+        }
+
+        #graphic-lightbox {
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        #graphic-lightbox #graphic-lightbox-panel {
+            transform: translateY(14px) scale(0.96);
+            opacity: 0;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+        }
+
+        #graphic-lightbox.is-open {
+            opacity: 1;
+        }
+
+        #graphic-lightbox.is-open #graphic-lightbox-panel {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        /* Lightweight YouTube Embed */
+        .video-lite {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 1rem;
+            background: #18181b;
+            border: 1px solid #e4e4e7;
+            cursor: pointer;
+        }
+
+        .video-lite img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, opacity 0.35s ease;
+        }
+
+        .video-lite:hover img {
+            transform: scale(1.03);
+        }
+
+        .video-lite-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.12));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-lite-play {
+            width: 4.25rem;
+            height: 4.25rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 51, 0, 0.9);
+            box-shadow: 0 0 40px rgba(255, 51, 0, 0.35);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .video-lite:hover .video-lite-play {
+            transform: scale(1.08);
+            background: #cc2900;
+        }
+
+        .video-lite.is-loaded .video-lite-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gd-motion-target,
+            #page-graphic-design .gd-grid > button {
+                opacity: 1;
+                transform: none;
+            }
+
+            .mobile-sweep,
+            .mobile-orb,
+            .mobile-phone,
+            #page-web-mobile.active .ms-reveal {
+                animation: none !important;
+            }
+
+            .ms-reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            #page-graphic-design .gd-grid > button,
+            #page-graphic-design .gd-grid > button img,
+            #graphic-lightbox,
+            #graphic-lightbox #graphic-lightbox-panel,
+            .mobile-phone-wrap,
+            .ms-chip,
+            .ms-cta::after,
+            .video-lite img,
+            .video-lite-overlay,
+            .video-lite-play {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand selection:text-white relative">
+
+    <!-- Navbar Minimalis -->
+    <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl bg-white/80 backdrop-blur-md border border-zinc-200 rounded-full px-6 py-3 flex items-center justify-between transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-zinc-300">
+        <a href="javascript:void(0)" onclick="navigate('home')" class="text-xl font-extrabold tracking-tight text-zinc-900 flex items-center gap-2">
+            <img loading="lazy" decoding="async" fetchpriority="low" src="favicon.png" alt="SH Logo" class="w-8 h-8 rounded-full object-cover">
+            Soleh.
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-zinc-500">
+            <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-brand transition-colors">Home</a>
+            <a href="javascript:void(0)" onclick="navigate('home', 'about')" class="hover:text-brand transition-colors">Tentang Saya</a>
+            
+            <!-- Dropdown Portfolio -->
+            <div class="relative group">
+                <button class="flex items-center gap-1 hover:text-brand transition-colors py-1 focus:outline-none">
+                    Portfolio <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"></i>
+                </button>
+                
+                <!-- Isi Dropdown -->
+                <div class="absolute top-full left-1/2 transform -translate-x-1/2 pt-3 w-56 z-50 pointer-events-none group-hover:pointer-events-auto">
+                    <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-3 scale-95 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:scale-100 transition-all duration-300 ease-out origin-top flex flex-col py-2 border border-zinc-100">
+                        <a href="javascript:void(0)" onclick="navigate('web-mobile')" class="px-5 py-2.5 text-zinc-600 hover:bg-brand/5 hover:text-brand transition-colors text-sm text-left flex items-center gap-2 group/item">
+                            <span class="transition-transform duration-300 group-hover/item:translate-x-1.5">Web & Mobile</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="navigate('graphic-design')" class="px-5 py-2.5 text-zinc-600 hover:bg-brand/5 hover:text-brand transition-colors text-sm text-left flex items-center gap-2 group/item">
+                            <span class="transition-transform duration-300 group-hover/item:translate-x-1.5">Graphic Design</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="navigate('ui-ux')" class="px-5 py-2.5 text-zinc-600 hover:bg-brand/5 hover:text-brand transition-colors text-sm text-left flex items-center gap-2 group/item">
+                            <span class="transition-transform duration-300 group-hover/item:translate-x-1.5">UI/UX Design</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="navigate('video-graphic')" class="px-5 py-2.5 text-zinc-600 hover:bg-brand/5 hover:text-brand transition-colors text-sm text-left flex items-center gap-2 group/item">
+                            <span class="transition-transform duration-300 group-hover/item:translate-x-1.5">Video Graphic</span>
+                        </a>
+                        <div class="h-[1px] bg-zinc-100 my-1 mx-4"></div>
+                        <a href="javascript:void(0)" onclick="navigate('journey')" class="px-5 py-2.5 text-zinc-900 hover:bg-brand/5 hover:text-brand transition-colors text-sm text-left font-bold flex items-center gap-2 group/item">
+                            <span class="transition-transform duration-300 group-hover/item:translate-x-1.5">Journey</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <button id="search-btn" class="hidden md:block text-zinc-400 hover:text-brand transition-colors focus:outline-none">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+            <a href="javascript:void(0)" onclick="navigate('home', 'contact')" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white bg-zinc-900 hover:bg-brand rounded-full transition-all">
+                Kontak
+            </a>
+            <!-- Mobile Menu Icon -->
+            <button id="mobile-menu-btn" class="md:hidden text-zinc-900 hover:text-brand transition-colors focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[100] hidden flex-col opacity-0 transition-all duration-300 overflow-hidden">
+        <!-- Header Menu Mobile -->
+        <div class="flex justify-between items-center p-6 border-b border-zinc-100 relative z-10">
+            <span class="text-xl font-extrabold tracking-tight text-zinc-900 flex items-center gap-2">
+                <img loading="lazy" decoding="async" fetchpriority="low" src="favicon.png" alt="SH Logo" class="w-8 h-8 rounded-full object-cover">
+                Soleh.
+            </span>
+            <button id="close-menu-btn" class="text-zinc-500 hover:text-brand bg-zinc-50 hover:bg-zinc-100 p-2 rounded-full transition-all focus:outline-none">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Daftar Menu Navigasi -->
+        <div class="flex flex-col gap-2 p-6 overflow-y-auto relative z-10 pb-24">
+            
+            <a href="javascript:void(0)" onclick="navigateMobile('home')" class="flex items-center gap-4 text-2xl font-bold text-zinc-900 hover:text-brand transition-all p-4 hover:bg-zinc-50 rounded-2xl group">
+                <div class="w-12 h-12 rounded-xl bg-zinc-100 group-hover:bg-brand/10 flex items-center justify-center transition-colors border border-transparent group-hover:border-brand/20">
+                    <i data-lucide="home" class="w-6 h-6 text-zinc-500 group-hover:text-brand"></i>
+                </div>
+                Beranda
+            </a>
+            
+            <a href="javascript:void(0)" onclick="navigateMobile('home', 'about')" class="flex items-center gap-4 text-2xl font-bold text-zinc-900 hover:text-brand transition-all p-4 hover:bg-zinc-50 rounded-2xl group">
+                <div class="w-12 h-12 rounded-xl bg-zinc-100 group-hover:bg-brand/10 flex items-center justify-center transition-colors border border-transparent group-hover:border-brand/20">
+                    <i data-lucide="user" class="w-6 h-6 text-zinc-500 group-hover:text-brand"></i>
+                </div>
+                Tentang Saya
+            </a>
+
+            <!-- Divider Kategori -->
+            <div class="mt-6 mb-3 px-4 flex items-center gap-4">
+                <span class="text-xs text-zinc-400 uppercase tracking-[0.2em] font-bold">Kategori Portfolio</span>
+                <div class="h-[1px] flex-1 bg-zinc-200"></div>
+            </div>
+
+            <!-- Sub-menu Karya -->
+            <div class="flex flex-col gap-1 ml-4 pl-6 border-l-2 border-zinc-100">
+                <a href="javascript:void(0)" onclick="navigateMobile('web-mobile')" class="flex items-center gap-4 text-lg font-medium text-zinc-600 hover:text-zinc-900 transition-all py-3 group">
+                    <div class="w-2 h-2 rounded-full bg-zinc-300 group-hover:bg-brand group-hover:scale-150 transition-all"></div> Web & Mobile Dev
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMobile('graphic-design')" class="flex items-center gap-4 text-lg font-medium text-zinc-600 hover:text-zinc-900 transition-all py-3 group">
+                    <div class="w-2 h-2 rounded-full bg-zinc-300 group-hover:bg-brand group-hover:scale-150 transition-all"></div> Graphic Design
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMobile('ui-ux')" class="flex items-center gap-4 text-lg font-medium text-zinc-600 hover:text-zinc-900 transition-all py-3 group">
+                    <div class="w-2 h-2 rounded-full bg-zinc-300 group-hover:bg-brand group-hover:scale-150 transition-all"></div> UI/UX Design
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMobile('video-graphic')" class="flex items-center gap-4 text-lg font-medium text-zinc-600 hover:text-zinc-900 transition-all py-3 group">
+                    <div class="w-2 h-2 rounded-full bg-zinc-300 group-hover:bg-brand group-hover:scale-150 transition-all"></div> Video Graphic
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMobile('journey')" class="flex items-center gap-4 text-lg font-bold text-zinc-900 hover:text-brand transition-all py-3 group">
+                    <div class="w-2 h-2 rounded-full bg-zinc-900 group-hover:bg-brand group-hover:scale-150 transition-all"></div> My Journey
+                </a>
+            </div>
+
+            <!-- Tombol CTA -->
+            <a href="javascript:void(0)" onclick="navigateMobile('home', 'contact')" class="mt-8 flex items-center justify-center gap-3 w-full px-8 py-4 bg-brand hover:bg-brand-dark rounded-2xl text-white font-bold transition-all text-lg">
+                <i data-lucide="mail" class="w-5 h-5"></i> Hubungi Saya
+            </a>
+            
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[100] hidden flex-col justify-center items-center opacity-0 transition-all duration-300">
+        <button id="close-search-btn" class="absolute top-8 right-8 text-zinc-500 hover:text-brand bg-zinc-50 hover:bg-zinc-100 p-3 rounded-full transition-all focus:outline-none">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        
+        <div class="w-full max-w-4xl px-6 transform transition-all duration-500 translate-y-8" id="search-container">
+            <!-- Search Input (Dibungkus tag form untuk mencegah reload saat Enter di HP) -->
+            <form onsubmit="event.preventDefault(); return false;" class="relative flex items-center border-b-2 border-zinc-200 focus-within:border-brand transition-colors pb-4">
+                <i data-lucide="search" class="w-8 h-8 md:w-10 md:h-10 text-zinc-400 mr-4"></i>
+                <input type="text" id="search-input" placeholder="Cari portfolio atau karya..." class="w-full bg-transparent text-3xl md:text-6xl font-black text-zinc-900 placeholder-zinc-200 focus:outline-none tracking-tight">
+            </form>
+            
+            <!-- Quick Links -->
+            <div class="mt-12">
+                <p class="text-sm font-bold text-zinc-400 uppercase tracking-[0.2em] mb-6">Pencarian Populer</p>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="closeSearchAndNavigate('web-mobile')" class="px-6 py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 hover:border-brand hover:bg-brand/5 hover:text-brand font-bold transition-all text-sm shadow-sm hover:shadow-md">Website & Apps</button>
+                    <button onclick="closeSearchAndNavigate('ui-ux')" class="px-6 py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 hover:border-brand hover:bg-brand/5 hover:text-brand font-bold transition-all text-sm shadow-sm hover:shadow-md">UI/UX Design</button>
+                    <button onclick="closeSearchAndNavigate('graphic-design')" class="px-6 py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 hover:border-brand hover:bg-brand/5 hover:text-brand font-bold transition-all text-sm shadow-sm hover:shadow-md">Desain Grafis</button>
+                    <button onclick="closeSearchAndNavigate('video-graphic')" class="px-6 py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 hover:border-brand hover:bg-brand/5 hover:text-brand font-bold transition-all text-sm shadow-sm hover:shadow-md">Video Editing</button>
+                    <button onclick="closeSearchAndNavigate('journey')" class="px-6 py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 hover:border-brand hover:bg-brand/5 hover:text-brand font-bold transition-all text-sm shadow-sm hover:shadow-md">Pengalaman (Journey)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WRAPPER HALAMAN -->
+    <main id="main-content">
+
+        <!-- ============================================== -->
+        <!-- HALAMAN 1: HOME (Beranda Utama) -->
+        <!-- ============================================== -->
+        <div id="page-home" class="page-view active">
+            
+            <!-- Bagian Hero -->
+            <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden bg-zinc-50">
+                
+                <div class="max-w-6xl mx-auto w-full flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20 relative z-10">
+                    <div class="flex-1 text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 bg-white text-sm font-semibold text-zinc-600 mb-6 shadow-sm">
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-brand"></span>
+                            </span>
+                            Tersedia untuk Kolaborasi
+                        </div>
+                        <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight text-zinc-900">
+                            Halo, Saya <br/>
+                            <span class="text-brand">Soleh Huda.</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-zinc-500 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-medium">
+                            Seorang creative tech dari <span class="font-bold text-zinc-900">UNU Yogyakarta</span> yang bersemangat dalam menggabungkan teknologi, desain, dan inovasi visual.
+                        </p>
+                        
+                        <!-- 4 Sosial Media -->
+                        <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
+                            <a href="https://www.linkedin.com/in/soleh-huda-654202272/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-zinc-600 hover:text-white hover:bg-brand hover:border-brand hover:-translate-y-1 transition-all">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://github.com/SoddaGembira" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-zinc-600 hover:text-white hover:bg-brand hover:border-brand hover:-translate-y-1 transition-all">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://www.instagram.com/soddagembira?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-zinc-600 hover:text-white hover:bg-brand hover:border-brand hover:-translate-y-1 transition-all">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </a>
+                            <a href="mailto:solehhuda1922@gmail.com" class="w-12 h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-zinc-600 hover:text-white hover:bg-brand hover:border-brand hover:-translate-y-1 transition-all">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="flex-1 flex justify-center md:justify-end">
+                        <div class="relative w-72 h-72 md:w-[450px] md:h-[450px] group">
+                            <!-- Blob Oranye di belakang yang akan berputar -->
+                            <div class="absolute inset-0 bg-brand blob-shape transform rotate-45 group-hover:scale-105 transition-transform duration-700"></div>
+                            <!-- Foto Anda -->
+                               <img loading="eager" decoding="async" fetchpriority="high" src="profil.png" width="900" height="900"
+                                 onerror="this.src='https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop'; this.onerror=null;"
+                                 alt="Soleh Huda" 
+                                 class="absolute inset-3 w-[calc(100%-24px)] h-[calc(100%-24px)] object-cover blob-shape filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700 bg-zinc-200">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Tentang Saya -->
+            <section id="about" class="py-24 px-6 relative bg-white border-t border-zinc-100">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-16">
+                        <h2 class="text-4xl font-extrabold text-zinc-900 mb-4">Tentang Saya</h2>
+                        <div class="w-24 h-1.5 bg-brand"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2 studio-card p-8 md:p-10 rounded-3xl relative overflow-hidden group">
+                            <i data-lucide="quote" class="w-12 h-12 text-zinc-200 mb-6 group-hover:text-brand transition-colors"></i>
+                            <h3 class="text-2xl font-bold mb-4 text-zinc-900">Menjelajahi Potensi, Menciptakan Inovasi</h3>
+                            <p class="text-zinc-600 text-lg leading-relaxed mb-6">
+                                Sebagai lulusan <strong class="text-zinc-900">Universitas Nahdlatul Ulama (UNU) Yogyakarta</strong>, saya percaya bahwa pendidikan bukan hanya tentang apa yang dipelajari di kelas, tetapi bagaimana mengaplikasikannya ke dunia nyata.
+                            </p>
+                            <p class="text-zinc-600 text-lg leading-relaxed">
+                                Saat ini saya terus mengembangkan keterampilan di bidang UI/UX Design, Web Development, Desain Grafis, dan Video Editing, serta aktif mengerjakan berbagai proyek digital untuk meningkatkan kemampuan dan pengalaman praktis.
+                            </p>
+                        </div>
+                        <div class="studio-card p-8 rounded-3xl flex flex-col justify-center items-center text-center">
+                            <div class="w-16 h-16 rounded-2xl bg-zinc-100 text-zinc-900 flex items-center justify-center mb-4 border border-zinc-200 group-hover:bg-brand group-hover:text-white transition-colors">
+                                <i data-lucide="map-pin" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-zinc-900 mb-1">Lokasi</h4>
+                            <p class="text-zinc-500">Yogyakarta, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <!-- 3 Kartu Keahlian Tambahan -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <!-- Kartu Pembelajar Cepat -->
+                        <div class="studio-card p-6 md:p-8 rounded-3xl flex items-center gap-5 group hover:border-brand">
+                            <div class="w-14 h-14 rounded-full bg-zinc-100 text-zinc-900 flex items-center justify-center shrink-0 group-hover:bg-brand group-hover:text-white transition-colors">
+                                <i data-lucide="book-open" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-zinc-900">Pembelajar Cepat</h4>
+                                <p class="text-sm text-zinc-500 mt-1 leading-snug">Selalu antusias mempelajari teknologi baru.</p>
+                            </div>
+                        </div>
+
+                        <!-- Kartu Kerja Tim -->
+                        <div class="studio-card p-6 md:p-8 rounded-3xl flex items-center gap-5 group hover:border-brand">
+                            <div class="w-14 h-14 rounded-full bg-zinc-100 text-zinc-900 flex items-center justify-center shrink-0 group-hover:bg-brand group-hover:text-white transition-colors">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-zinc-900">Kerja Tim</h4>
+                                <p class="text-sm text-zinc-500 mt-1 leading-snug">Komunikatif & mudah beradaptasi.</p>
+                            </div>
+                        </div>
+
+                        <!-- Kartu Inovatif -->
+                        <div class="studio-card p-6 md:p-8 rounded-3xl flex items-center gap-5 group hover:border-brand">
+                            <div class="w-14 h-14 rounded-full bg-zinc-100 text-zinc-900 flex items-center justify-center shrink-0 group-hover:bg-brand group-hover:text-white transition-colors">
+                                <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-zinc-900">Inovatif</h4>
+                                <p class="text-sm text-zinc-500 mt-1 leading-snug">Berpikir di luar kebiasaan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Tech Stack & Tools (Infinite Marquee) -->
+            <section id="skills" class="py-20 relative z-10 bg-zinc-50 border-y border-zinc-200 overflow-hidden">
+                <div class="max-w-6xl mx-auto px-6 mb-12 text-center">
+                    <h2 class="text-4xl font-extrabold text-zinc-900 mb-4 tracking-tight">Tech Stack & Tools</h2>
+                    <div class="w-12 h-1 bg-brand mx-auto mb-6"></div>
+                    <p class="text-zinc-500 max-w-2xl mx-auto text-lg">Perangkat dan teknologi inti yang saya gunakan untuk mewujudkan ide kreatif menjadi karya visual dan fungsional.</p>
+                </div>
+
+                <!-- Baris 1: Berjalan ke Kiri -->
+                <div class="logo-scroller mb-6">
+                    <div class="logo-scroller-inner">
+                        <!-- SET 1 -->
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/figma/F24E1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Figma"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Figma</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/react/61DAFB" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="React"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">React</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=xd" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Adobe XD"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Adobe XD</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/dart/0175C2" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Dart"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Dart</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=ps" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Photoshop"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Photoshop</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/javascript/F7DF1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="JavaScript"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">JavaScript</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/coreldraw/black" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="CorelDraw"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">CorelDraw</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/php/777BB4" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="PHP"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">PHP</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=pr" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Premiere Pro"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Premiere</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <i data-lucide="video" class="w-7 h-7 text-zinc-500 group-hover:text-zinc-900 transition-colors duration-300"></i> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">CapCut</span>
+                        </div>
+
+                        <!-- SET 2 (Kopian persis) -->
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/figma/F24E1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Figma"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Figma</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/react/61DAFB" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="React"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">React</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=xd" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Adobe XD"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Adobe XD</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/dart/0175C2" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Dart"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Dart</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=ps" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Photoshop"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Photoshop</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/javascript/F7DF1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="JavaScript"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">JavaScript</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/coreldraw/black" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="CorelDraw"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">CorelDraw</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/php/777BB4" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="PHP"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">PHP</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=pr" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Premiere Pro"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Premiere</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <i data-lucide="video" class="w-7 h-7 text-zinc-500 group-hover:text-zinc-900 transition-colors duration-300"></i> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">CapCut</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baris 2: Berjalan ke Kanan -->
+                <div class="logo-scroller">
+                    <div class="logo-scroller-inner reverse">
+                        <!-- SET 1 (Urutan Berbeda) -->
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/html5/E34F26" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="HTML/CSS"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">HTML / CSS</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/mysql/4479A1" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="MySQL"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">MySQL</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/figma/F24E1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Figma"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Figma</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/react/61DAFB" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="React"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">React</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=xd" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Adobe XD"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Adobe XD</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/dart/0175C2" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Dart"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Dart</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <i data-lucide="video" class="w-7 h-7 text-zinc-500 group-hover:text-zinc-900 transition-colors duration-300"></i> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">CapCut</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=ps" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Photoshop"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Photoshop</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/javascript/F7DF1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="JavaScript"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">JavaScript</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=pr" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Premiere Pro"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Premiere</span>
+                        </div>
+
+                        <!-- SET 2 (Kopian persis) -->
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/html5/E34F26" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="HTML/CSS"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">HTML / CSS</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/mysql/4479A1" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="MySQL"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">MySQL</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/figma/F24E1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Figma"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Figma</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/react/61DAFB" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="React"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">React</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=xd" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Adobe XD"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Adobe XD</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/dart/0175C2" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Dart"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Dart</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <i data-lucide="video" class="w-7 h-7 text-zinc-500 group-hover:text-zinc-900 transition-colors duration-300"></i> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">CapCut</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=ps" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Photoshop"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Photoshop</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://cdn.simpleicons.org/javascript/F7DF1E" class="w-7 h-7 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="JavaScript"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">JavaScript</span>
+                        </div>
+                        <div class="group flex items-center gap-4 px-6 py-3 bg-white border border-zinc-200 rounded-2xl shrink-0 hover:border-brand hover:shadow-lg transition-all duration-300 cursor-pointer">
+                            <img loading="lazy" decoding="async" fetchpriority="low" src="https://skillicons.dev/icons?i=pr" class="w-7 h-7 object-contain rounded-md filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Premiere Pro"> <span class="font-bold text-zinc-600 group-hover:text-zinc-900 text-base">Premiere</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Sertifikasi & Piagam -->
+            <section id="sertifikasi" class="py-24 px-6 my-12 relative bg-white">
+                <div class="max-w-6xl mx-auto relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                        <div>
+                            <h2 class="text-4xl font-extrabold text-zinc-900 mb-4">Sertifikasi</h2>
+                            <div class="w-24 h-1.5 bg-brand mb-4"></div>
+                            <p class="text-zinc-500 max-w-xl">Bukti kompetensi yang telah saya raih selama perjalanan akademik dan profesional.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Sertifikat 1 -->
+                        <div class="studio-card p-6 rounded-2xl flex flex-col gap-4 border-l-4 border-l-brand hover:border-l-brand">
+                            <div class="rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100">
+                                <img loading="lazy" decoding="async" fetchpriority="low" src="img/sertifikat/sertifikat alfabank.png" alt="Sertifikat Alfabank" class="w-full h-44 object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-zinc-900">Sertifikat Operator Komputer Berbasis Windows</h4>
+                                <p class="text-sm text-zinc-500 mb-3">Dokumen Sertifikat</p>
+                                <a href="img/sertifikat/sertifikat alfabank.png" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-brand hover:text-brand-dark transition-colors flex items-center gap-1">
+                                    Lihat Sertifikat <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Sertifikat 2 -->
+                        <div class="studio-card p-6 rounded-2xl flex flex-col gap-4 border-l-4 border-l-zinc-900 hover:border-l-brand">
+                            <div class="rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100">
+                                <img loading="lazy" decoding="async" fetchpriority="low" src="img/sertifikat/sertifikat digital marketing.png" alt="Sertifikat Digital Marketing" class="w-full h-44 object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-zinc-900">Sertifikat Digital Marketing</h4>
+                                <p class="text-sm text-zinc-500 mb-3">Dokumen Sertifikat</p>
+                                <a href="img/sertifikat/sertifikat digital marketing.png" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-brand hover:text-brand-dark transition-colors flex items-center gap-1">
+                                    Lihat Sertifikat <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Sertifikat 3 -->
+                        <div class="studio-card p-6 rounded-2xl flex flex-col gap-4 border-l-4 border-l-zinc-400 hover:border-l-brand">
+                            <div class="rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100">
+                                <img loading="lazy" decoding="async" fetchpriority="low" src="img/sertifikat/sertifikat IT development.png" alt="Sertifikat IT Development" class="w-full h-44 object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-zinc-900">Sertifikat IT Development</h4>
+                                <p class="text-sm text-zinc-500 mb-3">Dokumen Sertifikat</p>
+                                <a href="img/sertifikat/sertifikat IT development.png" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-brand hover:text-brand-dark transition-colors flex items-center gap-1">
+                                    Lihat Sertifikat <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian CTA / Kontak -->
+            <section id="contact" class="py-24 px-6 bg-zinc-50">
+                <div class="max-w-5xl mx-auto studio-card rounded-[3rem] p-10 md:p-16 relative overflow-hidden text-center md:text-left">
+                    <!-- Ornamen Pola Monokrom -->
+                    <div class="absolute -top-24 -right-24 w-64 h-64 border-[40px] border-zinc-100 rounded-full opacity-50"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+                        <div class="md:w-2/3">
+                            <h2 class="text-3xl md:text-5xl font-extrabold text-zinc-900 mb-6 leading-tight">Mari Berkolaborasi!</h2>
+                            <p class="text-zinc-600 text-lg mb-8 max-w-xl">Tertarik untuk bekerja sama, berdiskusi, atau sekadar menyapa? Kirimkan pesan atau temukan saya di sosial media.</p>
+                            
+                            <div class="flex flex-col sm:flex-row gap-4 items-center md:items-start mb-8 md:mb-0">
+                                <a href="https://wa.me/6281229770783" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-brand hover:bg-brand-dark text-white rounded-full font-bold transition-all flex items-center gap-2 shadow-lg shadow-brand/20">
+                                    <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi WhatsApp
+                                </a>
+                                <!-- 4 Sosial Media di Footer/Contact -->
+                                <div class="flex items-center gap-3">
+                                    <a href="https://www.linkedin.com/in/soleh-huda-654202272/" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-white border border-zinc-200 hover:border-brand text-zinc-600 hover:text-brand flex items-center justify-center transition-all">
+                                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                                    </a>
+                                    <a href="https://github.com/SoddaGembira" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-white border border-zinc-200 hover:border-brand text-zinc-600 hover:text-brand flex items-center justify-center transition-all">
+                                        <i data-lucide="github" class="w-6 h-6"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/soddagembira?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-white border border-zinc-200 hover:border-brand text-zinc-600 hover:text-brand flex items-center justify-center transition-all">
+                                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                                    </a>
+                                    <a href="mailto:solehhuda1922@gmail.com" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-white border border-zinc-200 hover:border-brand text-zinc-600 hover:text-brand flex items-center justify-center transition-all">
+                                        <i data-lucide="mail" class="w-6 h-6"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN 2: UI/UX DESIGN -->
+        <!-- ============================================== -->
+        <div id="page-ui-ux" class="page-view">
+            <section class="pt-36 pb-32 px-6 min-h-screen relative bg-zinc-50">
+                <!-- Background decoration -->
+                <div class="absolute top-40 -left-20 w-[500px] h-[500px] bg-brand/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
+
+                <div class="max-w-[1200px] mx-auto">
+                    <!-- Tombol Kembali -->
+                    <button onclick="navigate('home')" class="mb-8 flex items-center gap-3 text-zinc-500 hover:text-brand font-bold transition-colors group w-max">
+                        <div class="w-10 h-10 rounded-full bg-white border border-zinc-200 flex items-center justify-center group-hover:border-brand shadow-sm transition-all duration-300">
+                            <i data-lucide="arrow-left" class="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1"></i>
+                        </div>
+                        Kembali ke Beranda
+                    </button>
+                    
+                    <div class="mb-20 text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-zinc-200 text-zinc-600 text-sm font-bold rounded-full mb-6 shadow-sm">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand animate-pulse"></span> Kategori Karya
+                        </div>
+                        <h1 class="text-5xl md:text-7xl font-black text-zinc-900 mb-6 tracking-tight">UI/UX Design.</h1>
+                        <p class="text-lg md:text-xl text-zinc-500 max-w-2xl leading-relaxed mx-auto md:mx-0">Eksplorasi antarmuka pengguna dan pengalaman interaktif yang berpusat pada empati, estetika, dan kemudahan fungsional.</p>
+                    </div>
+
+                    <!-- Web Design Section (Tampilan Rapi bergaya Browser) -->
+                    <div class="mb-32">
+                        <div class="flex items-center gap-3 mb-10 justify-center md:justify-start">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-200/50 flex items-center justify-center text-zinc-900">
+                                <i data-lucide="layout-template" class="w-5 h-5"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-zinc-900">Web Interfaces</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                            
+                            <!-- Web Item 1 -->
+                            <div class="group cursor-pointer" onclick="openGraphicPreview('img/ui/ux/web ui hi.png', 'Hi — Website')">
+                                <div class="relative bg-white rounded-2xl shadow-md hover:shadow-2xl border border-zinc-200 overflow-hidden transition-all duration-500 transform hover:-translate-y-2">
+                                    <!-- Browser Top Bar -->
+                                    <div class="bg-zinc-50 border-b border-zinc-200 px-4 py-2.5 flex items-center gap-1.5">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                                    </div>
+                                    <!-- Image Container — scroll down on hover -->
+                                    <div class="overflow-hidden bg-zinc-100 relative" style="height:280px">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/ui/ux/web ui hi.png" class="w-full h-auto object-top transition-transform duration-[3.5s] ease-in-out group-hover:-translate-y-[40%]" alt="Hi — Website">
+                                        <div class="absolute inset-0 bg-brand/0 group-hover:bg-brand/5 transition-colors duration-300"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+                                                <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Lihat Detail
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-bold text-zinc-800 mt-6 text-center group-hover:text-brand transition-colors">Hicolleagues-Website</h3>
+                            </div>
+
+                            <!-- Web Item 2 -->
+                            <div class="group cursor-pointer md:mt-8" onclick="openGraphicPreview('img/ui/ux/web ui inf.png', 'Inf — Website')">
+                                <div class="relative bg-white rounded-2xl shadow-md hover:shadow-2xl border border-zinc-200 overflow-hidden transition-all duration-500 transform hover:-translate-y-2">
+                                    <div class="bg-zinc-50 border-b border-zinc-200 px-4 py-2.5 flex items-center gap-1.5">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                                    </div>
+                                    <div class="overflow-hidden bg-zinc-100 relative" style="height:280px">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/ui/ux/web ui inf.png" class="w-full h-auto object-top transition-transform duration-[3.5s] ease-in-out group-hover:-translate-y-[40%]" alt="Inf — Website">
+                                        <div class="absolute inset-0 bg-brand/0 group-hover:bg-brand/5 transition-colors duration-300"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+                                                <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Lihat Detail
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-bold text-zinc-800 mt-6 text-center group-hover:text-brand transition-colors">Informatika-Website</h3>
+                            </div>
+
+                            <!-- Web Item 3 -->
+                            <div class="group cursor-pointer" onclick="openGraphicPreview('img/ui/ux/web ui suit.png', 'Suit — Website')">
+                                <div class="relative bg-white rounded-2xl shadow-md hover:shadow-2xl border border-zinc-200 overflow-hidden transition-all duration-500 transform hover:-translate-y-2">
+                                    <div class="bg-zinc-50 border-b border-zinc-200 px-4 py-2.5 flex items-center gap-1.5">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                                    </div>
+                                    <div class="overflow-hidden bg-zinc-100 relative" style="height:280px">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/ui/ux/web ui suit.png" class="w-full h-auto object-top transition-transform duration-[3.5s] ease-in-out group-hover:-translate-y-[40%]" alt="Suit — Website">
+                                        <div class="absolute inset-0 bg-brand/0 group-hover:bg-brand/5 transition-colors duration-300"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+                                                <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Lihat Detail
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-bold text-zinc-800 mt-6 text-center group-hover:text-brand transition-colors">Suitmedia-Website</h3>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Mobile Design Section (Tampilan Grid Rapi) -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-10 justify-center md:justify-start">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-200/50 flex items-center justify-center text-zinc-900">
+                                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-zinc-900">Mobile Experiences</h2>
+                        </div>
+
+                        <!-- 2 Mobile Mockup Cards — full image display -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
+                            <!-- Card 1 — Satgas -->
+                            <div class="group flex flex-col items-center gap-5 cursor-pointer" onclick="openGraphicPreview('img/ui/ux/mobile satgas.png', 'Satgas Mobile')">
+                                <div class="w-full bg-zinc-100 rounded-2xl shadow-md hover:shadow-2xl border border-zinc-200 hover:border-brand/40 overflow-hidden transition-all duration-500 hover:-translate-y-2 p-5 relative">
+                                    <img loading="lazy" decoding="async" fetchpriority="low" src="img/ui/ux/mobile satgas.png" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-500" alt="Satgas Mobile">
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div class="bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+                                            <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Lihat Detail
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="text-base font-bold text-zinc-800 group-hover:text-brand transition-colors">Satgas-Mobile</h3>
+                            </div>
+
+                            <!-- Card 2 — SiCare -->
+                            <div class="group flex flex-col items-center gap-5 cursor-pointer sm:mt-10" onclick="openGraphicPreview('img/ui/ux/mobile sicare.png', 'SiCare Mobile')">
+                                <div class="w-full bg-zinc-100 rounded-2xl shadow-md hover:shadow-2xl border border-zinc-200 hover:border-brand/40 overflow-hidden transition-all duration-500 hover:-translate-y-2 p-5 relative">
+                                    <img loading="lazy" decoding="async" fetchpriority="low" src="img/ui/ux/mobile sicare.png" class="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-500" alt="SiCare Mobile">
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div class="bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+                                            <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Lihat Detail
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="text-base font-bold text-zinc-800 group-hover:text-brand transition-colors">SiCare-Mobile</h3>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN 3: WEB & MOBILE DEVELOPER -->
+        <!-- ============================================== -->
+        <div id="page-web-mobile" class="page-view">
+            <section class="pt-36 pb-24 px-6 min-h-screen relative overflow-hidden bg-zinc-50">
+                <!-- Background decoration (Aura Glow) -->
+                <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-brand/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                <div class="absolute bottom-40 left-10 w-[400px] h-[400px] bg-sky-500/5 rounded-full blur-3xl -z-10"></div>
+
+                <div class="max-w-6xl mx-auto">
+                    <!-- Tombol Kembali -->
+                    <button onclick="navigate('home')" class="mb-8 flex items-center gap-3 text-zinc-500 hover:text-brand font-bold transition-colors group w-max">
+                        <div class="w-10 h-10 rounded-full bg-white border border-zinc-200 flex items-center justify-center group-hover:border-brand shadow-sm transition-all duration-300">
+                            <i data-lucide="arrow-left" class="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1"></i>
+                        </div>
+                        Kembali ke Beranda
+                    </button>
+                    
+                    <div class="mb-20">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-zinc-200 text-zinc-600 text-sm font-bold rounded-full mb-6 shadow-sm">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand animate-pulse"></span> Kategori Karya
+                        </div>
+                        <h1 class="text-5xl md:text-7xl font-black text-zinc-900 mb-6 tracking-tight">Web & Mobile.</h1>
+                        <p class="text-lg md:text-xl text-zinc-500 max-w-2xl leading-relaxed">Kumpulan antarmuka digital dan aplikasi interaktif. Dirancang untuk performa tinggi dan pengalaman pengguna yang mulus.</p>
+                    </div>
+                    
+                    <!-- Kategori: Website -->
+                    <div class="mb-12 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-zinc-900 text-white flex items-center justify-center shadow-lg shadow-zinc-900/20">
+                            <i data-lucide="monitor" class="w-7 h-7"></i>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight">Web Applications</h2>
+                        <div class="h-[2px] flex-1 bg-gradient-to-r from-zinc-200 to-transparent ml-4 hidden md:block"></div>
+                    </div>
+
+                    <!-- Web Projects Container (Z-Pattern Layout) -->
+                    <div class="space-y-32 mb-32">
+                        
+                        <!-- Web Project 1 (Gambar Kiri, Teks Kanan) -->
+                        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center group perspective-1000">
+                            <!-- Mockup Browser -->
+                            <div class="w-full lg:w-3/5 order-2 lg:order-1 relative z-10">
+                                <!-- Glow effect memancar dari belakang saat hover -->
+                                <div class="absolute inset-0 bg-brand/30 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                                
+                                <div class="rounded-2xl bg-white border border-zinc-200 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] overflow-hidden tilt-right group-hover:shadow-[0_40px_80px_-15px_rgba(255,51,0,0.25)] group-hover:border-brand/40 relative bg-clip-padding">
+                                    <!-- Browser Header (macOS style) -->
+                                    <div class="bg-zinc-50/90 backdrop-blur border-b border-zinc-200 px-4 py-3 flex items-center gap-2 relative z-20 transition-colors group-hover:bg-white">
+                                        <div class="flex gap-1.5">
+                                            <div class="w-3 h-3 rounded-full bg-[#FF5F56] shadow-inner"></div>
+                                            <div class="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-inner"></div>
+                                            <div class="w-3 h-3 rounded-full bg-[#27C93F] shadow-inner"></div>
+                                        </div>
+                                        <div class="absolute left-1/2 -translate-x-1/2 bg-white border border-zinc-200 rounded-md px-5 py-1 text-[11px] text-zinc-400 font-mono text-center truncate shadow-sm transition-all group-hover:text-brand group-hover:border-brand/30">ponpesalislah.my.id</div>
+                                    </div>
+                                    <!-- Browser Body / Image -->
+                                    <div class="relative w-full aspect-[16/10] bg-zinc-200 overflow-hidden cursor-pointer">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/mobile/website Pondok Pesantren Al-Islah Magersari.png" class="w-full h-[120%] object-cover object-top pan-image" alt="Pondok Pesantren Al-Islah Magersari">
+                                        <!-- Play Overlay -->
+                                        <div class="absolute inset-0 bg-zinc-900/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                                            <div class="w-20 h-20 bg-brand text-white rounded-full flex items-center justify-center transform scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 delay-100 shadow-[0_0_40px_rgba(255,51,0,0.7)]">
+                                                <i data-lucide="play" class="w-8 h-8 ml-1 fill-white"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Detail Text -->
+                            <div class="w-full lg:w-2/5 order-1 lg:order-2 space-y-6 transform transition-all duration-700 group-hover:translate-x-4">
+                                <div class="w-12 h-1.5 bg-zinc-200 rounded-full group-hover:bg-brand transition-colors duration-500"></div>
+                                <div>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold text-zinc-900 mb-4 group-hover:text-brand transition-colors duration-500 tracking-tight leading-tight">Pondok Pesantren <br/>Al-Islah Magersari</h3>
+                                    <p class="text-zinc-500 text-lg leading-relaxed">Platform digital terpadu untuk manajemen kepesantrenan dan informasi publik. Dirancang dengan fokus pada kemudahan navigasi bagi santri dan wali murid, yang dilengkapi dengan chat bot AI.</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">Blade</span>
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">PHP</span>
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">JavaScript</span>
+                                </div>
+                                <div class="pt-4">
+                                    <a href="https://ponpesalislah.my.id" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3.5 bg-zinc-900 hover:bg-brand text-white rounded-full font-bold transition-all shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,51,0,0.5)] hover:-translate-y-1">
+                                        Kunjungi Website <i data-lucide="external-link" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Web Project 2 (Gambar Kanan, Teks Kiri) -->
+                        <div class="flex flex-col lg:flex-row-reverse gap-12 lg:gap-16 items-center group perspective-1000">
+                            <!-- Mockup Browser -->
+                            <div class="w-full lg:w-3/5 order-2 lg:order-1 relative z-10">
+                                <!-- Glow effect -->
+                                <div class="absolute inset-0 bg-brand/30 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+                                <div class="rounded-2xl bg-white border border-zinc-200 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] overflow-hidden tilt-left group-hover:shadow-[0_40px_80px_-15px_rgba(255,51,0,0.25)] group-hover:border-brand/40 relative bg-clip-padding">
+                                    <!-- Browser Header -->
+                                    <div class="bg-zinc-50/90 backdrop-blur border-b border-zinc-200 px-4 py-3 flex items-center gap-2 relative z-20 transition-colors group-hover:bg-white">
+                                        <div class="flex gap-1.5">
+                                            <div class="w-3 h-3 rounded-full bg-[#FF5F56] shadow-inner"></div>
+                                            <div class="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-inner"></div>
+                                            <div class="w-3 h-3 rounded-full bg-[#27C93F] shadow-inner"></div>
+                                        </div>
+                                        <div class="absolute left-1/2 -translate-x-1/2 bg-white border border-zinc-200 rounded-md px-5 py-1 text-[11px] text-zinc-400 font-mono text-center truncate shadow-sm transition-all group-hover:text-brand group-hover:border-brand/30">padepokanpagarnusa.my.id</div>
+                                    </div>
+                                    <!-- Browser Body / Image -->
+                                    <div class="relative w-full aspect-[16/10] bg-zinc-200 overflow-hidden cursor-pointer">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/mobile/website Padepokan Pagar Nusa.png" class="w-full h-[120%] object-cover object-top pan-image" alt="Website Padepokan Pagar Nusa">
+                                        <!-- Play Overlay -->
+                                        <div class="absolute inset-0 bg-zinc-900/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                                            <div class="w-20 h-20 bg-brand text-white rounded-full flex items-center justify-center transform scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 delay-100 shadow-[0_0_40px_rgba(255,51,0,0.7)]">
+                                                <i data-lucide="play" class="w-8 h-8 ml-1 fill-white"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Detail Text -->
+                            <div class="w-full lg:w-2/5 order-1 lg:order-2 space-y-6 transform transition-all duration-700 group-hover:-translate-x-4">
+                                <div class="w-12 h-1.5 bg-zinc-200 rounded-full group-hover:bg-brand transition-colors duration-500"></div>
+                                <div>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold text-zinc-900 mb-4 group-hover:text-brand transition-colors duration-500 tracking-tight leading-tight">Website Padepokan Pagar Nusa</h3>
+                                    <p class="text-zinc-500 text-lg leading-relaxed">Sistem profil dan pendaftaran digital untuk organisasi pencak silat. Memiliki arsitektur database yang aman untuk menyimpan data anggota dengan performa responsif.</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">Blade</span>
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">PHP</span>
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">Hack</span>
+                                </div>
+                                <div class="pt-4">
+                                    <a href="https://padepokanpagarnusa.my.id" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3.5 bg-zinc-900 hover:bg-brand text-white rounded-full font-bold transition-all shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,51,0,0.5)] hover:-translate-y-1">
+                                        Kunjungi Website <i data-lucide="external-link" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Web Project 3 (Gambar Kiri, Teks Kanan) -->
+                        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center group perspective-1000">
+                            <div class="w-full lg:w-3/5 order-2 lg:order-1 relative z-10">
+                                <div class="absolute inset-0 bg-brand/30 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+                                <div class="rounded-2xl bg-white border border-zinc-200 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] overflow-hidden tilt-right group-hover:shadow-[0_40px_80px_-15px_rgba(255,51,0,0.25)] group-hover:border-brand/40 relative bg-clip-padding">
+                                    <div class="bg-zinc-50/90 backdrop-blur border-b border-zinc-200 px-4 py-3 flex items-center gap-2 relative z-20 transition-colors group-hover:bg-white">
+                                        <div class="flex gap-1.5">
+                                            <div class="w-3 h-3 rounded-full bg-[#FF5F56] shadow-inner"></div>
+                                            <div class="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-inner"></div>
+                                            <div class="w-3 h-3 rounded-full bg-[#27C93F] shadow-inner"></div>
+                                        </div>
+                                        <div class="absolute left-1/2 -translate-x-1/2 bg-white border border-zinc-200 rounded-md px-5 py-1 text-[11px] text-zinc-400 font-mono text-center truncate shadow-sm transition-all group-hover:text-brand group-hover:border-brand/30">boostifay.vercel.app</div>
+                                    </div>
+                                    <div class="relative w-full aspect-[16/10] bg-zinc-200 overflow-hidden cursor-pointer">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/mobile/website boostifay.png" class="w-full h-[120%] object-cover object-top pan-image" alt="E-commerce Boostifay">
+                                        <div class="absolute inset-0 bg-zinc-900/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                                            <div class="w-20 h-20 bg-brand text-white rounded-full flex items-center justify-center transform scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 delay-100 shadow-[0_0_40px_rgba(255,51,0,0.7)]">
+                                                <i data-lucide="play" class="w-8 h-8 ml-1 fill-white"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-full lg:w-2/5 order-1 lg:order-2 space-y-6 transform transition-all duration-700 group-hover:translate-x-4">
+                                <div class="w-12 h-1.5 bg-zinc-200 rounded-full group-hover:bg-brand transition-colors duration-500"></div>
+                                <div>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold text-zinc-900 mb-4 group-hover:text-brand transition-colors duration-500 tracking-tight leading-tight">E-commerce Boostifay</h3>
+                                    <p class="text-zinc-500 text-lg leading-relaxed">Pusat Social Media Booster dan akun premium termurah yang dirancang dengan tampilan modern, proses pemesanan ringkas, serta performa cepat.</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">React</span>
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">Vite</span>
+                                    <span class="px-4 py-1.5 bg-white text-zinc-600 text-sm font-bold rounded-full border border-zinc-200 shadow-sm badge-stagger">Responsive UI</span>
+                                </div>
+                                <div class="pt-4">
+                                    <a href="https://boostifay.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3.5 bg-zinc-900 hover:bg-brand text-white rounded-full font-bold transition-all shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,51,0,0.5)] hover:-translate-y-1">
+                                        Kunjungi Website <i data-lucide="external-link" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Kategori: Mobile Apps -->
+                    <div class="mb-12 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-zinc-900 text-white flex items-center justify-center shadow-lg shadow-zinc-900/20">
+                            <i data-lucide="smartphone" class="w-7 h-7"></i>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight">Mobile Applications</h2>
+                        <div class="h-[2px] flex-1 bg-gradient-to-r from-zinc-200 to-transparent ml-4 hidden md:block"></div>
+                    </div>
+
+                    <!-- Mobile App Showcase -->
+                    <div class="max-w-5xl mx-auto">
+                        <div class="mobile-showcase relative overflow-hidden rounded-[2.5rem] border border-zinc-200 bg-gradient-to-br from-white via-zinc-50 to-zinc-100 p-8 md:p-10 shadow-[0_20px_60px_-25px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_80px_-25px_rgba(255,51,0,0.28)] hover:border-brand/30 transition-all duration-500 group">
+                            <div class="mobile-sweep"></div>
+                            <div class="mobile-orb absolute -top-24 -right-24 w-64 h-64 rounded-full bg-brand/10 blur-3xl"></div>
+
+                            <div class="relative z-10 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-10 items-center">
+                                <div class="space-y-5 text-center md:text-left">
+                                    <div class="ms-reveal ms-delay-1 w-14 h-14 rounded-2xl bg-white shadow-md border border-zinc-100 flex items-center justify-center mx-auto md:mx-0 group-hover:scale-105 transition-transform duration-500">
+                                        <i data-lucide="bot" class="w-7 h-7 text-brand"></i>
+                                    </div>
+
+                                    <h3 class="ms-reveal ms-delay-2 text-3xl md:text-4xl font-black text-zinc-900 group-hover:text-brand transition-colors tracking-tight">SantriBot AI</h3>
+
+                                    <p class="ms-reveal ms-delay-3 text-zinc-500 font-medium text-lg leading-relaxed">Asisten virtual cerdas berbasis Artificial Intelligence untuk menjawab pertanyaan interaktif secara instan. Versi Progressive Web Apps (PWA) yang dioptimalkan penuh untuk memberikan pengalaman native mobile.</p>
+
+                                    <div class="ms-reveal ms-delay-4 flex flex-wrap justify-center md:justify-start gap-2 pt-1">
+                                        <span class="ms-chip px-4 py-1.5 bg-white text-zinc-700 text-xs font-bold rounded-full border border-zinc-200 shadow-sm">JavaScript</span>
+                                        <span class="ms-chip px-4 py-1.5 bg-white text-zinc-700 text-xs font-bold rounded-full border border-zinc-200 shadow-sm">NLP Machine Learning</span>
+                                        <span class="ms-chip px-4 py-1.5 bg-white text-zinc-700 text-xs font-bold rounded-full border border-zinc-200 shadow-sm">PWA</span>
+                                    </div>
+
+                                    <div class="ms-reveal ms-delay-5 pt-2">
+                                        <a href="https://ponpesalislah.my.id" target="_blank" rel="noopener noreferrer" class="ms-cta inline-flex items-center gap-2 px-7 py-3.5 bg-zinc-900 hover:bg-brand text-white rounded-full font-bold transition-all shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,51,0,0.5)] hover:-translate-y-1">
+                                            Buka Aplikasi <i data-lucide="external-link" class="w-4 h-4"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="ms-reveal ms-delay-5 flex justify-center md:justify-end">
+                                    <div class="mobile-phone-wrap">
+                                        <div class="mobile-phone relative w-56 sm:w-64 aspect-[9/18] border-[8px] border-zinc-900 rounded-[2.2rem] bg-zinc-900 shadow-2xl">
+                                        <div class="absolute top-0 inset-x-0 h-5 bg-zinc-900 rounded-b-xl w-32 mx-auto z-20"></div>
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/mobile/mobile chat bot wpa.png" class="w-full h-full object-cover rounded-[1.6rem]" alt="SantriBot AI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN 4: GRAPHIC DESIGN -->
+        <!-- ============================================== -->
+        <div id="graphic-lightbox" class="fixed inset-0 z-[200] hidden items-center justify-center p-4" onclick="closeGraphicPreview(event)">
+            <div class="absolute inset-0 bg-zinc-900/85 backdrop-blur-sm"></div>
+            <div id="graphic-lightbox-panel" class="relative z-10 max-w-[90vw] max-h-[88vh] w-auto">
+                <button type="button" onclick="closeGraphicPreview()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/20 text-white hover:bg-white/30 flex items-center justify-center transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <div class="bg-white rounded-2xl p-2 shadow-2xl">
+                    <img loading="lazy" decoding="async" fetchpriority="low" id="graphic-lightbox-img" src="" alt="Preview" class="max-w-[86vw] max-h-[78vh] w-auto h-auto object-contain rounded-xl">
+                </div>
+                <p id="graphic-lightbox-title" class="hidden"></p>
+            </div>
+        </div>
+
+        <div id="page-graphic-design" class="page-view">
+            <section class="pt-36 pb-24 px-6 min-h-screen bg-zinc-50">
+                <div class="max-w-6xl mx-auto">
+                    <button onclick="navigate('home')" class="mb-8 flex items-center gap-2 text-zinc-500 hover:text-brand font-medium transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Beranda
+                    </button>
+
+                    <div class="mb-12 gd-motion-target">
+                        <span class="px-3 py-1 bg-white border border-zinc-200 text-zinc-600 text-sm font-bold rounded-full mb-3 inline-block">Kategori Karya</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4">Graphic Design</h1>
+                        <p class="text-lg text-zinc-500 max-w-2xl">Klik gambar untuk preview lebih besar. Semua ukuran sudah disesuaikan agar tidak kepotong.</p>
+                    </div>
+
+                    <div class="mb-14 gd-motion-target">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-xs text-zinc-400 uppercase tracking-[0.25em] font-extrabold">01</span>
+                            <h2 class="text-2xl font-extrabold text-zinc-900">Logo Design</h2>
+                            <div class="flex-1 h-[1px] bg-zinc-200"></div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-5 gd-grid">
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo esteh.png','Logo Es Teh')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo esteh.png" alt="Logo Es Teh" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo gerceb.png','Logo Gerceb')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo gerceb.png" alt="Logo Gerceb" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo kekayon.png','Logo Kekayon')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo kekayon.png" alt="Logo Kekayon" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo pisang make.png','Logo Pisang Make')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo pisang make.png" alt="Logo Pisang Make" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo satgas.png','Logo Satgas')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo satgas.png" alt="Logo Satgas" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo taiyaki.png','Logo Taiyaki')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo taiyaki.png" alt="Logo Taiyaki" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo filosofi satgas.png','Logo Filosofi Satgas')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo filosofi satgas.png" alt="Logo Filosofi Satgas" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo filosofi teh.png','Logo Filosofi Teh')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo filosofi teh.png" alt="Logo Filosofi Teh" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                            <button type="button" onclick="openGraphicPreview('img/graphic/logo ar group.jpg','Logo AR Group')" class="group rounded-2xl border border-zinc-200 bg-white p-3">
+                                <div class="aspect-square rounded-xl bg-zinc-50 flex items-center justify-center overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/logo ar group.jpg" alt="Logo AR Group" class="w-full h-full object-contain p-4"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-14 gd-motion-target">
+                        <div class="flex items-center gap-4 mb-8">
+                            <span class="text-xs text-zinc-400 uppercase tracking-[0.25em] font-extrabold">02</span>
+                            <h2 class="text-2xl font-extrabold text-zinc-900">Karya Lainnya</h2>
+                            <div class="flex-1 h-[1px] bg-zinc-200"></div>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-sm font-extrabold tracking-[0.2em] text-zinc-500 uppercase mb-3">Feed Instagram</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 gd-grid">
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 3.png','Feed IG 3')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 3.png" alt="Feed IG 3" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 6.png','Feed IG 6')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 6.png" alt="Feed IG 6" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 13.png','Feed IG 13')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 13.png" alt="Feed IG 13" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 14.png','Feed IG 14')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 14.png" alt="Feed IG 14" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 17.png','Feed IG 17')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 17.png" alt="Feed IG 17" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 34.png','Feed IG 34')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 34.png" alt="Feed IG 34" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 20.png','Feed IG 20')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 20.png" alt="Feed IG 20" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 22.png','Feed IG 22')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 22.png" alt="Feed IG 22" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 30.png','Feed IG 30')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 30.png" alt="Feed IG 30" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 31.png','Feed IG 31')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 31.png" alt="Feed IG 31" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 32.png','Feed IG 32')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 32.png" alt="Feed IG 32" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig 33.png','Feed IG 33')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig 33.png" alt="Feed IG 33" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig jalan sehat.png','Feed IG Jalan Sehat')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig jalan sehat.png" alt="Feed IG Jalan Sehat" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig lomba 2.png','Feed IG Lomba 2')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig lomba 2.png" alt="Feed IG Lomba 2" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig lomba.png','Feed IG Lomba')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig lomba.png" alt="Feed IG Lomba" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/feed ig pikr.png','Feed IG PIKR')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/feed ig pikr.png" alt="Feed IG PIKR" class="w-full h-full object-contain"></div></button>
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-sm font-extrabold tracking-[0.2em] text-zinc-500 uppercase mb-3">Mockup Branding</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-5 gd-grid">
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocap es teh glas.png','Mocap Es Teh Gelas')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocap es teh glas.png" alt="Mocap Es Teh Gelas" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup 1.png','Mockup 1')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup 1.png" alt="Mockup 1" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup 2.png','Mockup 2')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup 2.png" alt="Mockup 2" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup 3.png','Mockup 3')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup 3.png" alt="Mockup 3" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup benner es teh.png','Mockup Banner Es Teh')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup benner es teh.png" alt="Mockup Banner Es Teh" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup benner satgas.png','Mockup Banner Satgas')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup benner satgas.png" alt="Mockup Banner Satgas" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup bot es teh.png','Mockup Botol Es Teh')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup bot es teh.png" alt="Mockup Botol Es Teh" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup celmek es teh.png','Mockup Celemek Es Teh')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup celmek es teh.png" alt="Mockup Celemek Es Teh" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/mocup instagram satgas.png','Mockup Instagram Satgas')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/mocup instagram satgas.png" alt="Mockup Instagram Satgas" class="w-full h-full object-contain"></div></button>
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-sm font-extrabold tracking-[0.2em] text-zinc-500 uppercase mb-3">Line Art</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-5 gd-grid">
+                                <button type="button" onclick="openGraphicPreview('img/graphic/line art abri.png','Line Art Abri')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/line art abri.png" alt="Line Art Abri" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/line art hani.png','Line Art Hani')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/line art hani.png" alt="Line Art Hani" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/line art titis.png','Line Art Titis')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/line art titis.png" alt="Line Art Titis" class="w-full h-full object-contain"></div></button>
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-sm font-extrabold tracking-[0.2em] text-zinc-500 uppercase mb-3">Aplikasi Desain</h3>
+
+                            <div class="mb-6">
+                                <h4 class="text-xs font-extrabold tracking-[0.2em] text-zinc-400 uppercase mb-3">Decal Kendaraan</h4>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 gd-grid">
+                                    <button type="button" onclick="openGraphicPreview('img/graphic/decal kuning.png','Decal Kuning')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/decal kuning.png" alt="Decal Kuning" class="w-full h-full object-contain"></div></button>
+                                    <button type="button" onclick="openGraphicPreview('img/graphic/decal merah.png','Decal Merah')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/decal merah.png" alt="Decal Merah" class="w-full h-full object-contain"></div></button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xs font-extrabold tracking-[0.2em] text-zinc-400 uppercase mb-3">Desain Jersey &amp; Kaos</h4>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 gd-grid">
+                                    <button type="button" onclick="openGraphicPreview('img/graphic/jersy hijau unu.png','Jersey Hijau UNU')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/jersy hijau unu.png" alt="Jersey Hijau UNU" class="w-full h-full object-contain"></div></button>
+                                    <button type="button" onclick="openGraphicPreview('img/graphic/jersy kaos desaku.png','Jersey Kaos Desaku')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/jersy kaos desaku.png" alt="Jersey Kaos Desaku" class="w-full h-full object-contain"></div></button>
+                                    <button type="button" onclick="openGraphicPreview('img/graphic/jersy terjal.png','Jersey Terjal')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/jersy terjal.png" alt="Jersey Terjal" class="w-full h-full object-contain"></div></button>
+                                    <button type="button" onclick="openGraphicPreview('img/graphic/jersy unu.png','Jersey UNU')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/jersy unu.png" alt="Jersey UNU" class="w-full h-full object-contain"></div></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-sm font-extrabold tracking-[0.2em] text-zinc-500 uppercase mb-3">Cover Buku</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-2 gap-5 gd-grid">
+                                <button type="button" onclick="openGraphicPreview('img/graphic/cover buku hijau.png','Cover Buku Hijau')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/cover buku hijau.png" alt="Cover Buku Hijau" class="w-full h-full object-contain"></div></button>
+                                <button type="button" onclick="openGraphicPreview('img/graphic/cover buku merah.png','Cover Buku Merah')" class="rounded-2xl border border-zinc-200 bg-white p-3"><div class="aspect-square rounded-xl bg-zinc-50 overflow-hidden"><img loading="lazy" decoding="async" fetchpriority="low" src="img/graphic/cover buku merah.png" alt="Cover Buku Merah" class="w-full h-full object-contain"></div></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN 5: VIDEO GRAPHIC -->
+        <!-- ============================================== -->
+        <div id="page-video-graphic" class="page-view">
+            <section class="pt-36 pb-24 px-6 min-h-screen bg-zinc-50">
+                <div class="max-w-6xl mx-auto">
+                    <button onclick="navigate('home')" class="mb-8 flex items-center gap-2 text-zinc-500 hover:text-brand font-medium transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Beranda
+                    </button>
+                    <div class="mb-12">
+                        <span class="px-3 py-1 bg-white border border-zinc-200 text-zinc-600 text-sm font-bold rounded-full mb-3 inline-block">Showcase</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4">Video Graphic</h1>
+                        <p class="text-lg text-zinc-500 max-w-2xl">Motion graphic, editing video, dan storytelling visual. Klik thumbnail untuk putar video langsung di halaman ini.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="rounded-3xl overflow-hidden border border-zinc-200 bg-white p-3">
+                            <button type="button" class="video-lite" data-video-id="xm1iahlc1hc" data-video-url="https://youtu.be/xm1iahlc1hc" aria-label="Putar video Motion Graphic 1">
+                                <img loading="lazy" decoding="async" fetchpriority="low" src="https://i.ytimg.com/vi/xm1iahlc1hc/hqdefault.jpg" width="1280" height="720" alt="Thumbnail Motion Graphic 1">
+                                <span class="video-lite-overlay" aria-hidden="true">
+                                    <span class="video-lite-play">
+                                        <svg viewBox="0 0 24 24" class="w-8 h-8 ml-1 fill-current" focusable="false" aria-hidden="true">
+                                            <path d="M8 5v14l11-7z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </button>
+                            <h3 class="text-2xl font-bold text-zinc-900 mt-5 px-2" data-video-title data-default-title="Video Graphic 1">Video Graphic 1</h3>
+                            <a href="https://youtu.be/xm1iahlc1hc" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark transition-colors px-2 pb-2">Buka di YouTube <i data-lucide="external-link" class="w-4 h-4"></i></a>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden border border-zinc-200 bg-white p-3">
+                            <button type="button" class="video-lite" data-video-id="9sTGbmimYlI" data-video-url="https://youtu.be/9sTGbmimYlI" aria-label="Putar video Motion Graphic 2">
+                                <img loading="lazy" decoding="async" fetchpriority="low" src="https://i.ytimg.com/vi/9sTGbmimYlI/hqdefault.jpg" width="1280" height="720" alt="Thumbnail Motion Graphic 2">
+                                <span class="video-lite-overlay" aria-hidden="true">
+                                    <span class="video-lite-play">
+                                        <svg viewBox="0 0 24 24" class="w-8 h-8 ml-1 fill-current" focusable="false" aria-hidden="true">
+                                            <path d="M8 5v14l11-7z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </button>
+                            <h3 class="text-2xl font-bold text-zinc-900 mt-5 px-2" data-video-title data-default-title="Video Graphic 2">Video Graphic 2</h3>
+                            <a href="https://youtu.be/9sTGbmimYlI" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark transition-colors px-2 pb-2">Buka di YouTube <i data-lucide="external-link" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- ============================================== -->
+        <!-- HALAMAN 6: JOURNEY -->
+        <!-- ============================================== -->
+        <div id="page-journey" class="page-view">
+            <section class="pt-36 pb-24 px-6 min-h-screen bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Tombol Kembali -->
+                    <button onclick="navigate('home')" class="mb-8 flex items-center gap-2 text-zinc-500 hover:text-brand font-medium transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Beranda
+                    </button>
+                    
+                    <div class="mb-16">
+                        <span class="px-3 py-1 bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-bold rounded-full mb-3 inline-block">Personal</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4">My Journey</h1>
+                        <p class="text-lg text-zinc-500 max-w-2xl">Jejak langkah, pengalaman organisasi, dan cerita di balik proses kolaboratif selama menjadi mahasiswa.</p>
+                    </div>
+                    
+                    <!-- Timeline Container -->
+                    <div class="relative border-l-2 border-zinc-200 ml-4 md:ml-6 space-y-16 pb-12">
+
+                        <!-- Item 1 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-brand"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/1.png" alt="Liaison Officer 3 November 2025" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 3 November 2025
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Liaison Officer</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya berperan sebagai Liaison Officer (LO) pada event puncak Nation Building Beswan Djarum, sebuah pelatihan soft skills intensif selama lima hari yang melibatkan 534 penerima Beasiswa Djarum 2024/2025. Dalam peran ini, saya terlibat langsung dalam memastikan kelancaran operasional lapangan selama seluruh rangkaian kegiatan berskala nasional.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Tanggung jawab utama saya meliputi pengelolaan logistik konsumsi dan koordinasi transportasi bus peserta, mulai dari agenda Cultural Visit hingga pementasan kolosal Malam Dharma Puruhita. Pengalaman ini memberikan pembelajaran praktis dalam manajemen logistik skala besar, komunikasi profesional lintas tim, serta penerapan standar service excellence untuk mendukung pengalaman peserta secara optimal.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row-reverse gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/2.png" alt="Co-Facilitator 23 Agustus 2025" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 23 Agustus 2025
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Co-Facilitator</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya terlibat sebagai Co-Facilitator dalam acara Townhall Muda Yogyakarta, sebuah forum berskala nasional yang mengangkat isu strategis "Pendidikan Aman, Inklusif, dan Bebas dari Kekerasan Seksual" dengan menghadirkan pembicara tingkat nasional dari berbagai sektor.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Sebagai Co-Facilitator, saya bertanggung jawab memastikan kelancaran sesi Focus Group Discussion (FGD), termasuk mengoordinasikan alur diskusi dan mendukung manajemen kebutuhan pembicara. Keterlibatan dengan peserta yang beragam, mulai dari perwakilan disabilitas, BEM universitas, Satgas PPKS perguruan tinggi, hingga komunitas umum, memberikan pengalaman berharga dalam kolaborasi lintas sektor, pemecahan masalah secara cepat, serta peningkatan sensitivitas terhadap isu sosial.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/3.png" alt="Liaison Officer 4 Mei 2025" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 4 Mei 2025
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Liaison Officer</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya berperan sebagai Liaison Officer (LO) dalam rangkaian pelatihan Leadership Development Beswan Djarum 2024/2025 yang diikuti oleh 66 mahasiswa penerima Djarum Beasiswa Plus, dengan agenda pelatihan yang intensif dan terstruktur.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Dalam peran ini, saya bertindak sebagai koordinator transportasi utama bagi pembicara dan peserta, serta memastikan kebutuhan transportasi dan akomodasi terpenuhi sesuai standar layanan yang ditetapkan. Tanggung jawab tersebut melatih kemampuan saya dalam manajemen waktu, koordinasi lintas wilayah, serta komunikasi efektif di bawah tekanan, guna mendukung kelancaran seluruh sesi pelatihan.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row-reverse gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/4.png" alt="Ketua PPS Desa 26 Mei 2024" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 26 Mei 2024
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Ketua PPS Desa</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya menjabat sebagai Ketua Panitia Pemungutan Suara (PPS) Desa Ngalian dalam pelaksanaan Pilkada 2024. Peran ini menuntut kepemimpinan operasional dan tingkat akuntabilitas publik yang tinggi dalam mengoordinasikan seluruh tahapan pemilu di tingkat desa.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Tanggung jawab saya mencakup pengelolaan logistik Tempat Pemungutan Suara (TPS), koordinasi dengan KPU dan aparat keamanan, serta memastikan proses pemungutan dan penghitungan suara berjalan tepat waktu, akurat, dan netral. Pengalaman ini memberikan pemahaman langsung mengenai manajemen proyek berskala pemerintahan, pengambilan keputusan di bawah tekanan, serta pentingnya integritas dalam pelayanan publik.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/5.png" alt="Community Empowerment 14 Februari 2024" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 14 Februari 2024
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Community Empowerment</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya tergabung sebagai anggota inti Divisi Logistik (Divisi Palugada) dalam Tim Sapta Dharma 2.0 Beswan Djarum pada proyek Community Empowerment di Panti Asuhan Bina Siwi, Bantul. Program ini berfokus pada pengembangan eduwisata sosial untuk mendorong kemandirian finansial panti asuhan.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Dalam tim, saya bertanggung jawab atas manajemen logistik end-to-end, koordinasi internal lintas divisi, serta dukungan operasional dan pemasaran program. Keberhasilan pelaksanaan proyek dengan kompleksitas operasional yang tinggi ini berkontribusi pada pencapaian Tim Sapta Dharma 2.0 sebagai penerima penghargaan The Best Team dalam program Community Empowerment.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 6 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row-reverse gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/6.png" alt="Speaker in Sawala 15 30 Januari 2024" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 30 Januari 2024
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Speaker in Sawala#15</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya berkontribusi sebagai Speaker dalam kegiatan SAWALA Junior Scratch Programming, sebuah program edukatif yang bertujuan memperkenalkan logika coding kepada siswa tingkat SMP melalui pendekatan kreatif dan menyenangkan.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Sebagai Speaker, saya merancang materi pembelajaran dan slide presentasi interaktif yang diimplementasikan melalui praktik langsung pembuatan game sederhana menggunakan Scratch. Hasil kegiatan menunjukkan seluruh peserta berhasil menyelesaikan proyek Scratch pertama mereka, dengan lebih dari 50% peserta menilai sesi ini sangat informatif. Pengalaman ini memperkuat kemampuan saya dalam public speaking, penyusunan materi edukatif, serta penyampaian konsep teknis secara sederhana dan aplikatif.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 7 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/7.png" alt="Moderator Workshop 11 Juni 2023" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 11 Juni 2023
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Moderator Workshop</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya berperan sebagai Moderator dalam Workshop Virtual "Membuat Website Tanpa Coding" yang ditujukan untuk peserta umum guna memperkenalkan pembuatan website fungsional tanpa latar belakang teknis pemrograman.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Dalam peran ini, saya mengelola alur diskusi, interaksi narasumber dan peserta, serta memastikan efektivitas waktu selama sesi berlangsung melalui platform Zoom. Dengan partisipasi lebih dari 15 peserta, pengalaman ini memberikan pemahaman praktis mengenai manajemen acara virtual, komunikasi publik, serta dasar konsep pengembangan website berbasis no-code.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 8 -->
+                        <div class="relative pl-8 md:pl-16">
+                            <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-white border-4 border-zinc-900"></div>
+
+                            <div class="studio-card p-6 md:p-8 rounded-3xl flex flex-col lg:flex-row-reverse gap-8 items-start group">
+                                <div class="w-full lg:w-5/12">
+                                    <div class="rounded-2xl overflow-hidden h-64 md:h-80 border border-zinc-200 bg-zinc-100">
+                                        <img loading="lazy" decoding="async" fetchpriority="low" src="img/journey/8.png" alt="Ketua Panitia 14 Agustus 2022" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-7/12 space-y-4">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 text-sm font-semibold mb-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-brand"></i> 14 Agustus 2022
+                                    </div>
+                                    <h3 class="text-3xl font-bold text-zinc-900 group-hover:text-brand transition-colors">Ketua Panitia</h3>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Saya memiliki pengalaman awal kepemimpinan sebagai Ketua Panitia kegiatan "Jalan Sehat dan Sadar Lingkungan dalam rangka Dirgahayu Indonesia ke-77", hasil kolaborasi antara UNU Future Leaders Community Yogyakarta dan Karang Taruna Panca Bhakti Dengken.</p>
+                                    <p class="text-zinc-600 leading-relaxed text-[17px]">Sebagai ketua panitia, saya bertanggung jawab atas perencanaan dan pelaksanaan proyek secara menyeluruh, mulai dari koordinasi dengan stakeholder desa hingga pengawasan logistik dan pemecahan masalah di hari pelaksanaan. Kegiatan yang melibatkan distribusi 1.000 kupon door prize ini menjadi fondasi penting dalam pengembangan kemampuan kepemimpinan, komunikasi lintas pihak, dan eksekusi kegiatan berskala komunitas.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 text-center border-t border-zinc-200 bg-white">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-zinc-500 font-medium">
+            <p>&copy; <span id="year"></span> Soleh Huda. Dibuat dengan kreativitas.</p>
+            <p>Universitas Nahdlatul Ulama Yogyakarta</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function optimizeImageLoading(activePageId = 'home') {
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach((img) => {
+                if (img.closest('#hero')) return;
+                if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+                if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+                if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'low');
+            });
+
+            const activePage = document.getElementById('page-' + activePageId);
+            if (!activePage) return;
+            const firstViewportImages = activePage.querySelectorAll('img');
+            firstViewportImages.forEach((img, index) => {
+                if (index < 4) {
+                    img.setAttribute('loading', 'eager');
+                    img.setAttribute('fetchpriority', 'high');
+                }
+            });
+        }
+
+        if (mobileMenuBtn && closeMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0');
+                    mobileMenu.classList.add('opacity-100');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('opacity-100');
+            mobileMenu.classList.add('opacity-0');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        if (closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+        }
+
+        function navigateMobile(pageId, targetId = null) {
+            navigate(pageId, targetId);
+            closeMobileMenu();
+        }
+
+        // Search Overlay Logic
+        const searchBtn = document.getElementById('search-btn');
+        const closeSearchBtn = document.getElementById('close-search-btn');
+        const searchOverlay = document.getElementById('search-overlay');
+        const searchContainer = document.getElementById('search-container');
+        const searchInput = document.getElementById('search-input');
+
+        if (searchBtn && searchOverlay && searchContainer && searchInput) {
+            searchBtn.addEventListener('click', () => {
+                searchOverlay.classList.remove('hidden');
+                searchOverlay.classList.add('flex');
+                
+                // Trigger animation
+                setTimeout(() => {
+                    searchOverlay.classList.remove('opacity-0');
+                    searchOverlay.classList.add('opacity-100');
+                    searchContainer.classList.remove('translate-y-8');
+                    searchContainer.classList.add('translate-y-0');
+                    searchInput.focus();
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        function closeSearch() {
+            searchOverlay.classList.remove('opacity-100');
+            searchOverlay.classList.add('opacity-0');
+            searchContainer.classList.remove('translate-y-0');
+            searchContainer.classList.add('translate-y-8');
+            
+            setTimeout(() => {
+                searchOverlay.classList.add('hidden');
+                searchOverlay.classList.remove('flex');
+                searchInput.value = ''; // Reset input
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', closeSearch);
+        }
+
+        // Menutup search dengan tombol Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !searchOverlay.classList.contains('hidden')) {
+                closeSearch();
+            }
+        });
+
+        // Navigasi dari tombol pencarian populer
+        function closeSearchAndNavigate(pageId) {
+            closeSearch();
+            setTimeout(() => {
+                navigate(pageId);
+            }, 300);
+        }
+
+        // Fungsi Navigasi Utama (Diperbarui untuk mendukung scroll ke section)
+        function navigate(pageId, targetId = null) {
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            const targetPage = document.getElementById('page-' + pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+                optimizeImageLoading(pageId);
+            }
+
+            // Jika ada target section spesifik (seperti #about atau #contact)
+            if (targetId) {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100); // Sedikit jeda agar halaman baru sempat me-render
+            } else {
+                // Jika hanya pindah halaman, scroll ke paling atas
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        // Graphic Design Lightbox
+        function openGraphicPreview(src, title) {
+            const lb = document.getElementById('graphic-lightbox');
+            const img = document.getElementById('graphic-lightbox-img');
+            const text = document.getElementById('graphic-lightbox-title');
+            img.src = src;
+            img.alt = title;
+            text.textContent = title;
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+            requestAnimationFrame(() => {
+                lb.classList.add('is-open');
+            });
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeGraphicPreview(e) {
+            const lb = document.getElementById('graphic-lightbox');
+            const panel = document.getElementById('graphic-lightbox-panel');
+            if (e && e.type === 'click' && panel.contains(e.target) && !e.target.closest('button')) return;
+            lb.classList.remove('is-open');
+            setTimeout(() => {
+                lb.classList.remove('flex');
+                lb.classList.add('hidden');
+                document.getElementById('graphic-lightbox-img').src = '';
+            }, 220);
+            document.body.style.overflow = '';
+        }
+
+        // Graphic Design staggered reveal on scroll
+        function initGraphicMotion() {
+            const targets = document.querySelectorAll('#page-graphic-design .gd-motion-target, #page-graphic-design .gd-grid > button');
+            if (!targets.length) return;
+            targets.forEach((el) => el.classList.remove('is-visible'));
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const siblings = Array.from(entry.target.parentElement?.children || []);
+                    const index = Math.max(0, siblings.indexOf(entry.target));
+                    const delay = Math.min(index * 45, 300);
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+            targets.forEach((el) => observer.observe(el));
+        }
+
+        function loadLiteYoutube(card) {
+            if (!card || card.dataset.loaded === 'true') return;
+            const videoId = card.dataset.videoId;
+            if (!videoId) return;
+
+            pauseOtherLiteYoutubeEmbeds(card);
+
+            const iframe = document.createElement('iframe');
+            const videoUrl = card.dataset.videoUrl || `https://youtu.be/${videoId}`;
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1&playsinline=1&origin=${encodeURIComponent(window.location.origin)}`;
+            iframe.title = card.getAttribute('aria-label') || 'YouTube video player';
+            iframe.loading = 'lazy';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            iframe.className = 'absolute inset-0 w-full h-full rounded-2xl border-0';
+
+            // If embed is blocked by owner settings, keep a direct link fallback.
+            iframe.dataset.fallbackUrl = videoUrl;
+
+            card.innerHTML = '';
+            card.appendChild(iframe);
+            card.dataset.loaded = 'true';
+            card.classList.add('is-loaded');
+        }
+
+        function pauseOtherLiteYoutubeEmbeds(activeCard) {
+            const loadedCards = document.querySelectorAll('.video-lite.is-loaded');
+            loadedCards.forEach((card) => {
+                if (card === activeCard) return;
+                const iframe = card.querySelector('iframe');
+                if (!iframe || !iframe.contentWindow) return;
+                iframe.contentWindow.postMessage(JSON.stringify({
+                    event: 'command',
+                    func: 'pauseVideo',
+                    args: []
+                }), '*');
+            });
+        }
+
+        function initLiteYoutubeEmbeds() {
+            const cards = document.querySelectorAll('.video-lite[data-video-id]');
+            cards.forEach((card) => {
+                card.addEventListener('click', () => loadLiteYoutube(card));
+            });
+        }
+
+        async function fetchYoutubeTitle(videoUrl) {
+            const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(videoUrl)}&format=json`;
+            const response = await fetch(endpoint, { method: 'GET' });
+            if (!response.ok) throw new Error('Failed to fetch YouTube metadata');
+            const data = await response.json();
+            return data?.title?.trim() || '';
+        }
+
+        async function hydrateVideoMetadata() {
+            const cards = document.querySelectorAll('.video-lite[data-video-url]');
+            await Promise.all(Array.from(cards).map(async (card) => {
+                const cardContainer = card.closest('.rounded-3xl');
+                const titleElement = cardContainer?.querySelector('[data-video-title]');
+                if (!titleElement) return;
+
+                const defaultTitle = titleElement.dataset.defaultTitle || titleElement.textContent.trim();
+                const videoUrl = card.dataset.videoUrl;
+                if (!videoUrl) {
+                    titleElement.textContent = defaultTitle;
+                    return;
+                }
+
+                try {
+                    const youtubeTitle = await fetchYoutubeTitle(videoUrl);
+                    titleElement.textContent = youtubeTitle || defaultTitle;
+                    card.setAttribute('aria-label', `Putar video ${youtubeTitle || defaultTitle}`);
+                } catch (error) {
+                    titleElement.textContent = defaultTitle;
+                }
+            }));
+        }
+
+        initGraphicMotion();
+        initLiteYoutubeEmbeds();
+        hydrateVideoMetadata();
+        optimizeImageLoading('home');
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeGraphicPreview();
+            }
+        });
+    </script>
+</body>
+</html>
+
